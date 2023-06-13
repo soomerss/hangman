@@ -22,6 +22,6 @@ jobs:
         docker login -u $doc_user -p $doc_pd
     - name : docker build
       run: |
-        docker build --platform linux/arm64 --tag ${doc_user}/hangman:latest .
+        docker build --platform linux/arm64 --tag ${{secrets.DOCKER_USER}}/hangman:latest .
     - name : docker push
       run: docker push $doc_user/hangman:latest
