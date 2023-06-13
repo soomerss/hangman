@@ -25,4 +25,4 @@ jobs:
       run: |
         docker build --platform linux/amd64 -t $doc_user/hangman:latest .
     - name : docker push
-      run: docker push $doc_pd/hangman:latest
+      run: docker push $doc_user/hangman:latest
