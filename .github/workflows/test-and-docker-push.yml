@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read
 
+env:
+  doc_user: ${{ secrets.DOCKER_USER }}
+  doc_pd: ${{ secrets.DOCKER_PASSWORD }}
+
 jobs:
   build:
 
@@ -37,3 +41,14 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest test*.py
+        
+    # docker login, build, push
+        
+    - name: docker login
+      run: |
+        docker login -u $doc_user -p $doc_pd
+    - name : docker build
+      run: |
+        docker build --platform linux/amd64 -t $doc_user/hangman:latest .
+    - name : docker push
+      run: docker push $doc_user/hangman:latest
